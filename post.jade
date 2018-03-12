@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+	head
+		+h.load("/template/css/base.css")
+		+h.load("/template/css/index.css")
+		+h.load("/template/css/post.css")
+		+h.load("/template/css/about.css")
+		+h.load("/template/css/font-awesome.min.css")
+		+h.load("http://resource.farbox.com/css/basic.css")
+		+h.load("http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js")
+		+h.load("/template/js/post.js")
+	body
+		nav.option
+			ul
+				li: a(href="/")= "首页"
+				li: a(href="/about")= "关于"
+				li: a(href="/archive")= "归档"
+		.post-main
+			cover = post.metadata.cover
+			if cover
+				.post-cover
+					img(src= cover, width="100%", title="author:" + post.metadata.cover_author)
+			.post-container
+				h1= post.title
+				p.date= post.date.format('%B %d,%Y')
+				.detail
+					p= post.content
+					if posts.previous_one
+						span.pre-one
+							a(href= posts.previous_one.url)
+								i.icon-caret-left.icon-1x
+						span.media-pre-one
+							a(href= posts.previous_one.url)= "上一篇"
+					if posts.next_one
+						span.next-one
+							a(href= posts.next_one.url): i.icon-caret-right.icon-1x
+						span.media-pre-one
+							a(href= posts.next_one.url)= "下一篇"
+			.comment-area
+				+post.comments_as_html()
+		footer.footer
+	    	p="©"
+	    		a(href="/")= site.title
+	    		= ".Powered by"
+	    		a(href="http://www.bitcron.com")= "Bitcron"
+	    		= ".Theme by 王三思"

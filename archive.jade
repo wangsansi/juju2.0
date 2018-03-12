@@ -1,0 +1,20 @@
+extends base.jade
+block content
+	posts = get_data(type='post', limit=100, sort='desc')
+	if request.args.use == 'tags'
+		entries = posts.group('tags')
+	else
+		entries = posts.group( '-date:year')
+	ul.archive
+		for year, posts in entries
+			li= year
+			ul.archive-article
+				for post in posts
+					li
+						a.archive-posts(href= post.url)= post.title
+					    | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    //- tags = post.metadata.tags
+					    //- if tags
+					    	//- for tag_name in tags
+					    		//- a.archive-tags(href= "/tags/"+tag_name)= "#" + tag_name
+					    span= post.date.format('%Y-%m-%d')

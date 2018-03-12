@@ -1,0 +1,6 @@
+extends base.jade
+
+block content
+	posts = get_data(type='post', limit=5, tags=tags)
+	for post in posts
+		include includes/posts_main.jade

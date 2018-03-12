@@ -1,0 +1,38 @@
+
+doctype html
+html(lang="en")
+	head
+		+h.load("/template/css/base.css")
+		+h.load("/template/css/index.css")
+		+h.load("/template/css/archive.css")
+		+h.load("/template/css/about.css")
+		+h.load("/template/css/font-awesome.min.css")
+		+h.load("http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js")
+		+h.load("/template/js/main.js")
+	body
+		include includes/header.jade
+		.main
+			block content
+			.turning
+				paginator = d.get_paginator 
+				if paginator.has_pre		    	
+	    			.media-pre
+	    				a(href=paginator.pre_url)= "上一页"
+	    			.pre-button
+	    				a(href=paginator.pre_url)
+	    					i.icon-caret-left.icon-1x
+	    					span.pre-page= "上一页"	
+	    		if paginator.has_next 			
+	    			.media-next
+	    				a(href=paginator.next_url)= "下一页"
+	    			.next-button
+	    				a(href=paginator.next_url)
+	    					i.icon-caret-right.icon-1x
+	    					span.next-page= "下一页"
+	    footer.footer
+	    	p="©"
+	    		a(href="/")= site.title
+	    		= ".Powered by"
+	    		a(href="http://www.bitcron.com")= "Bitcron"
+	    		= ".Theme by 王三思"
+

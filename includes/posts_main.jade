@@ -1,0 +1,30 @@
+.article
+	.left-part: .date				
+		p.day= post.date.format('%d')
+		p.month= post.date.format('%b')
+	.right-part
+		h1.title
+			a(href=post.url)= post.title 
+		h2= post.date.format('%Y-%m-%d') 
+		.content
+			if post.cover
+				.img-area: a(href= post.url)								
+					img(src= post.cover, title= "author"+post.cover_author)
+			.word-area: a(href= post.url)	
+				p= post.content.limit(length=300,keep_images=false)
+			.tag
+				.label							
+					ul
+						tags = 	post.metadata.tags
+						if tags
+							for tag_name in tags
+								li
+									a(href="/tags/"+ tag_name)
+										i.icon-circle.icon-1x
+									    = "&nbsp;"+tag_name
+				.comment 
+					ul
+						li
+							a(href= post.url)
+								span= post.comments.length
+							    = " 评论"
